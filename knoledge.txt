@@ -1,0 +1,2 @@
+Q : INT_MAX+1 = ?
+A : INT_MIN，原因是

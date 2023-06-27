@@ -1,0 +1,4 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: 中繼目錄 (x64\Debug\) 包含從其他專案 (Pratice1.vcxproj) 共用的檔案。這可能導致錯誤的清除和重建行為。
+  Pratice1.cpp
+C:\Users\USER\Desktop\程式\C++\練習\Pratice1\Pratice1\Pratice1.cpp(12,16): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
+  Pratice1.vcxproj -> C:\Users\USER\Desktop\程式\C++\練習\Pratice1\x64\Debug\數字反轉.exe
