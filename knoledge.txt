@@ -1,2 +1,11 @@
 Q : INT_MAX+1 = ?
 A : INT_MIN，原因是
+
+Q : 如何在不同class共用member variable ?
+A : 利用static或pointer，static 出現在 class 的 member variable 的意思是
+	該 variable 並不屬於某個 instance，他屬於這個 class
+	所有以此 class 生成出來的 instance 都共用這個variable
+	最經典的範例就是用來計數這個 class 總共生成了多少個 instance。
+	參考 : https://medium.com/@alan81920/c-c-%E4%B8%AD%E7%9A%84-static-extern-%E7%9A%84%E8%AE%8A%E6%95%B8-9b42d000688f
+	
+Q : 
