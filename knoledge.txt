@@ -1,5 +1,8 @@
 Q : INT_MAX+1 = ?
-A : INT_MIN，原因是
+A : INT_MIN，原因是溢出(overflow)，超出了有限位数整数类型所能表示的范围。
+	0111 1111 1111 1111 1111 1111 1111 1111 +
+	0000 0000 0000 0000 0000 0000 0000 0001 =1
+	1000 0000 0000 0000 0000 0000 0000 0000
 
 Q : 如何在不同class共用member variable ?
 A : 利用static或pointer，static 出現在 class 的 member variable 的意思是
@@ -8,4 +11,109 @@ A : 利用static或pointer，static 出現在 class 的 member variable 的意�
 	最經典的範例就是用來計數這個 class 總共生成了多少個 instance。
 	參考 : https://medium.com/@alan81920/c-c-%E4%B8%AD%E7%9A%84-static-extern-%E7%9A%84%E8%AE%8A%E6%95%B8-9b42d000688f
 	
-Q : 
+Q : memory leak是什麼?
+A : 程式沒能成功釋放棄用的記憶體，造成效能的損失或是執行的失敗。以C來說，如果使用 malloc ，程式執行完了，沒釋放記憶體free()，就會 leak。
+
+Q : list, vector, map, set 区别与用法比较
+A : list, vector, map, set 在 STL中屬於容器
+	vector使用連續記憶體儲存，vector可以如同陣列一樣的存取方式
+	vector可以在集合中快速進行隨機存取（random access），還能自動調整容量（capacity）
+	
+	list所有元素可以隨機配置在記憶體的任何位置
+	儲存元素的資料前，我們會先以節點(Node)的方式去包裝元素
+	並且在該節點中設有另一個節點的位址，我們先稱為Next，在C++中通常使用指標
+	查找的能力差，但是插入和刪除速度較快。
+	
+	Set和Vector的區別在於Set不包含重复的數據
+	Set和Map的区别在于Set只含有Key
+	而Map有一个Key和Key所对应的Value两个元素。
+	
+	map每個元素都有一個唯一的鍵和相應的值。鍵是唯一的，而值可以重複。
+	
+	set是一種無序的資料結構，每個元素都是唯一的，不允許重複
+	因此每一筆資料都會有個Key值
+	Set可用於作集合的運算，例如聯集、交集、差集等
+	
+	總結來說：
+
+	如果需要一個有序的、可重複元素的集合
+	並且需要快速存取和修改元素，可以使用 List 或 Vector。
+	
+	如果需要根據鍵查找相應的值，可以使用 Map
+	
+	如果需要一個無序的、不可重複元素的集合
+	並且只關心元素的存在與否，可以使用 Set。
+	
+	※補充 : queue -> 先進先出 stack -> 後進先出
+	
+Q : Design Pattern的用途在於加速彼此協作的效率，在系統開始成長的時候
+	有基本的模式能進行管理
+	Design Pattern是在物件導向的基礎原則上，建立了一套設計的原則
+	
+Q : SOLID是什麼?
+A : S : (SRP) 每一個function都應該遵守單一職責的任務
+	ex : 煞車踏板就只控制車子停止
+	O : (OCP)開放/封閉原則，在原有功能的基礎上新增新的功能(擴充)
+	不去變動本來就有的功能(封閉)
+	L : (LSP)Liskov替換，在一個系統中
+	子類別應該可以替換掉父類別而不會影響程式架構。
+	ex : 父 : 車子 子 : 跑車，子類別要能做父類別能做的事情
+	I : (ISP)介面隔離，把不同功能的功能從介面中分離出來。
+	ex : 比如我想要把不會跑的車跟能跑的車分開來
+	我就要從車子的功能中分出能不能跑的功能，再將功能分別指定給不同的車子
+	D : (DIP)依賴反轉，類別中，不應該直接使用另一個具有實作類別
+	而是使用抽象的介面，去承接繼承該介面的實作類別。
+	它的目標就是解除物件與物件間，兩者的直接相依關係。
+	
+Q : Call by value | Call by address | Call by reference的差別 ?
+A : 通常你所使用的函式參數沒有加什麼特別的符號或關鍵字，都會是Call by value
+	若使用太多call by value而使用結束後沒有刪除掉未使用的記憶體空間
+	可能會導致記憶體不足而程式崩潰
+	
+	Call by address 將參數以記憶體位置的方式傳到呼叫此參數的副程式
+	副程式需要有一個指標來指到這個參數的記憶體位置
+	但call by addres本質上也是call by value，只不過那個value剛好就是address而已
+	
+	Call by reference 跟 Call by value 最大的差別是，他是引用變數而非數值
+	將參數以數值的方式傳遞到呼叫此參數的副程式，副程式需要有一個參數來接收這個參數
+	ex : https://wayne265265.pixnet.net/blog/post/112556555-%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91call-by-value%2C-call-by-address%2C-call-by-referenc
+	
+Q : public private protected具體差別
+A : public : 對於class：可以在任何地方訪問該class。
+	對於成員變數和方法：可以在任何地方訪問該成員變數或方法，無需限制。
+	
+	private：對於class：無法從該class以外的地方訪問該class。
+	對於成員變數和方法：僅能在定義它們的class內部訪問，其他class無法直接訪問。
+	
+	protected（受保護）：對於class：無法從該class以外的地方訪問該class，除非它是該class的子class（派生class）(繼承)。
+	對於成員變數和方法：僅能在定義它們的class內部訪問，或者在該class的子class中訪問。
+	
+Q : 全域變數 區域變數 靜態變數 是什麼?
+A : 全域變數是在程式中能夠被所有函式或區塊存取的變數
+	它們在整個程式的執行期間都存在，並且可以在任何地方被使用。
+
+	區域變數是在特定函式或區塊中聲明的變數，只能在所聲明的函式或區塊內部使用
+	它們的作用範圍（scope）僅限於該函式或區塊，當函式或區塊結束時，這些變數就會被銷毀。
+
+	靜態變數是在函式內聲明的變數，但與一般區域變數不同的是
+	它們在函式每次被呼叫時並不會被重新初始化。靜態變數的生命週期與程式的執行時間相同
+	且它們的作用範圍僅限於聲明它們的函式內部。
+	
+	總結來說，全域變數可以在程式的任何地方被使用
+	區域變數只能在聲明它們的函式或區塊內部使用
+	而靜態變數則是一種在函式內部具有持久性的變數。
+	
+Q : function overloading 函式多載 ?
+A : 所謂的重載函式是將語意、功能相似的函式用同樣的函式名表示。
+	而這些不同的函式透過傳入不同的參數型態或個數以及回傳值來自動辨別。
+	ex : void eample(int num)  void eample(double num)
+	
+Q : windows Multi-thread
+A : 使用Multi-thread可以提高程式的效能和反應速度。
+	當某個執行緒遇到等待時間（例如等待輸入、等待網路回應等）
+	系統可以立即切換到另一個執行緒，繼續執行其他任務，而不需要浪費等待時間。
+	這樣可以充分利用系統的資源，提高程式的效率。
+	ex : https://kheresy.wordpress.com/2012/07/06/multi-thread-programming-in-c-thread-p1/
+
+	
+	
