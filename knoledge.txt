@@ -75,7 +75,7 @@ A : 通常你所使用的函式參數沒有加什麼特別的符號或關鍵字�
 	但call by addres本質上也是call by value，只不過那個value剛好就是address而已
 	
 	Call by reference 跟 Call by value 最大的差別是，他是引用變數而非數值
-	將參數以數值的方式傳遞到呼叫此參數的副程式，副程式需要有一個參數來接收這個參數
+	將參數以數值的方式傳遞到呼叫此參數的副程式，副程式需要有一個參數(指標)來接收這個參數，Call by reference是傳遞位址
 	ex : https://wayne265265.pixnet.net/blog/post/112556555-%E3%80%90%E6%95%99%E5%AD%B8%E3%80%91call-by-value%2C-call-by-address%2C-call-by-referenc
 	
 Q : public private protected具體差別
